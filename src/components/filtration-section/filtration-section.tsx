@@ -5,7 +5,7 @@ import styles from './filtration-section.module.css';
 function FiltrationSection() {
     return (
         <section className={styles.filtrationSection}>
-            <h5>Фильтрировать</h5>
+            <h5>Фильтровать</h5>
             <div>
                 <input
                     name='checkbox'

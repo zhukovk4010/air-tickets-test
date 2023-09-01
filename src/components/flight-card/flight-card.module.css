@@ -1,0 +1,67 @@
+.route {
+    padding: 1em 2em;
+    border-bottom: 1px solid #eaeaea;
+}
+
+.route > div {
+    display: inline-block;
+    font-size: 1.2rem;
+    font-weight: bolder;
+}
+
+.airportInitials {
+    color: #006f9c;
+}
+
+.timeInformation {
+    padding: 1em 2em;
+    display: flex;
+    justify-content: space-between;
+}
+
+.timeAndDate > div {
+    display: inline-block;
+}
+
+.time {
+    font-size: 1.2rem;
+    font-weight: bolder;
+}
+
+.date {
+    margin: 0 0.3em;
+    color: #006f9c;
+}
+
+.flightTime {
+    font-size: 1.2rem;
+    font-weight: bolder;
+}
+
+.clockImg {
+    width: 1em;
+    margin-right: 0.2em;
+}
+
+.transplantInformationWrapper {
+    text-align: center;
+}
+
+.line {
+    margin: 0 4em;
+    border: 1px solid #eaeaea;
+}
+
+.transplantInformation {
+    padding: 0 2em;
+    display: inline-block;
+    position: relative;
+    background-color: white;
+    bottom: 10px;
+    color: orange;
+    text-align: center;
+}
+
+.companyInformation {
+    padding: 0 2em 1em;
+}

@@ -5,7 +5,7 @@ import styles from './pricing-section.module.css';
 function PricingSection() {
     return (
         <section className={styles.pricingSection}>
-            <h5>Фильтрировать</h5>
+            <h5>Цена</h5>
             <div className={styles.pricingElement}>
                 <label htmlFor='from'>От</label>
                 <input

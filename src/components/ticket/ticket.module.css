@@ -1,0 +1,39 @@
+.ticket {
+    background-color: white;
+    border-radius: 0.5em;
+}
+
+.ticketHeader {
+    color: white;
+    padding: 0.5em;
+    border-radius: 0.5em 0.5em 0 0;
+    background-color: #006f9c;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    align-items: center;
+}
+
+.companyName {
+    font-size: 2rem;
+}
+
+.ticketPrice {
+    text-align: right;
+}
+
+.price {
+    font-size: 2rem;
+}
+
+.blueLine {
+    border: 2px solid #006f9c;
+}
+
+.chooseButton {
+    text-align: center;
+    font-size: 1.2rem;
+    border-radius: 0 0 0.5em 0.5em;
+    background-color: orange;
+    color: white;
+    padding: 1em 0;
+}

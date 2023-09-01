@@ -5,7 +5,7 @@ import styles from './airlines-section.module.css';
 function AirlinesSection() {
     return (
         <section className={styles.pricingSection}>
-            <h5>Фильтрировать</h5>
+            <h5>Авикомпании</h5>
             <div className={styles.pricingElement}>
                 <input
                     name='checkbox'
@@ -20,7 +20,7 @@ function AirlinesSection() {
                     type='checkbox'
                     className={styles.checkbox}
                 />
-                <label>Авикомания цена</label>
+                <label>Авикомпания цена</label>
             </div>
         </section>
     );

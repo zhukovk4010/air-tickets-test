@@ -1,0 +1,6 @@
+.app {
+    margin: 1em 1.5em 0;
+    display: grid;
+    grid-template-columns: 25% 75%;
+    gap: 1.5em;
+}

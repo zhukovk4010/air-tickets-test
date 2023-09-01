@@ -1,0 +1,19 @@
+.pricingSection > h5 {
+    font-size: 1.2rem;
+    margin-top: 2em;
+    margin-bottom: 1em;
+}
+
+.numberImput {
+    margin-left: 0.1em;
+}
+
+.pricingElement {
+    padding-right: 1.5em;
+    display: grid;
+    grid-template-columns: 1.5em auto;
+}
+
+.pricingElement + .pricingElement {
+    margin-top: 1em;
+}

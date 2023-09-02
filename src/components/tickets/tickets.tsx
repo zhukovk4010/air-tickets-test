@@ -1,25 +1,25 @@
 //Компонент списка билетов
 
-import { useState } from 'react';
-import { useAppSelector } from '../../hooks/store-hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks/store-hooks';
 import Ticket from '../ticket/ticket';
 
 import styles from './tickets.module.css';
+import { showMoreTickets } from '../../store/slices/ticketsSlice';
 
 const Tickets = () => {
-    const { ticketsList } = useAppSelector((state) => ({
+    const { ticketsList, ticketsToView } = useAppSelector((state) => ({
         ticketsList: state.tickets.allTickets,
+        ticketsToView: state.tickets.ticketsToView,
     }));
 
-    //Количество отображаемых билетов
-    const [numberOfDisplayedTickets, setNumberOfDisplayedTickets] = useState(2);
+    const dispatch = useAppDispatch();
 
     const ticketLictComponents = ticketsList.filter(
-        (item, index) => index < numberOfDisplayedTickets
+        (item, index) => index < ticketsToView
     );
 
     const onButtonClick = () => {
-        setNumberOfDisplayedTickets(numberOfDisplayedTickets + 2);
+        dispatch(showMoreTickets(2));
     };
 
     return (

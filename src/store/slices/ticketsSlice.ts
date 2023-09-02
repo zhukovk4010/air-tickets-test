@@ -27,11 +27,13 @@ export type TicketType = {
 type InitialStateType = {
     allTickets: TicketType[];
     ticketsToDisplay: TicketType[];
+    ticketsToView: number;
 };
 
 const initialState: InitialStateType = {
     allTickets: [],
     ticketsToDisplay: [],
+    ticketsToView: 2,
 };
 
 const ticketsSlice = createSlice({
@@ -45,19 +47,25 @@ const ticketsSlice = createSlice({
             state.allTickets.sort((a, b) => {
                 return a.totalPrice - b.totalPrice;
             });
+            state.ticketsToView = 2;
         },
         sortedByPriceAscending(state, action: PayloadAction) {
             state.allTickets.sort((a, b) => {
                 return b.totalPrice - a.totalPrice;
             });
+            state.ticketsToView = 2;
         },
         sortedByTime(state, action: PayloadAction) {
             state.allTickets.sort((a, b) => {
                 return a.totalTime - b.totalTime;
             });
+            state.ticketsToView = 2;
         },
         filterByOneTranspant(state, action) {},
         filterWithoutTranspant(state, action) {},
+        showMoreTickets(state, action: PayloadAction<number>) {
+            state.ticketsToView += action.payload;
+        },
     },
 });
 
@@ -68,6 +76,7 @@ export const {
     sortedByTime,
     filterByOneTranspant,
     filterWithoutTranspant,
+    showMoreTickets,
 } = ticketsSlice.actions;
 
 export default ticketsSlice.reducer;

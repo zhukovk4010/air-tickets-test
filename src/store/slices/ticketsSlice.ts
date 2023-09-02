@@ -19,6 +19,7 @@ export type TicketType = {
     id: number;
     airlineName: string;
     totalPrice: number;
+    totalTime: number;
     startingFlight: FlightType;
     returnFlight: FlightType;
 };
@@ -40,9 +41,21 @@ const ticketsSlice = createSlice({
         addTickets(state, action: PayloadAction<TicketType[]>) {
             state.allTickets = action.payload;
         },
-        sortedByPriceDescending(state, action) {},
-        sortedByPriceAscending(state, action) {},
-        sortedByTime(state, action) {},
+        sortedByPriceDescending(state, action: PayloadAction) {
+            state.allTickets.sort((a, b) => {
+                return a.totalPrice - b.totalPrice;
+            });
+        },
+        sortedByPriceAscending(state, action: PayloadAction) {
+            state.allTickets.sort((a, b) => {
+                return b.totalPrice - a.totalPrice;
+            });
+        },
+        sortedByTime(state, action: PayloadAction) {
+            state.allTickets.sort((a, b) => {
+                return a.totalTime - b.totalTime;
+            });
+        },
         filterByOneTranspant(state, action) {},
         filterWithoutTranspant(state, action) {},
     },

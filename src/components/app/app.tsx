@@ -82,6 +82,10 @@ const App = () => {
             1000 /
             60;
 
+        //Общее время в пути
+        let totalTime =
+            totalTimeMinutesStartingFlight + totalTimeMinutesReturnFlight;
+
         //Заполняем список нужными данными
         ticketsList.push({
             //id
@@ -90,6 +94,8 @@ const App = () => {
             airlineName: ticket.flight.carrier.caption,
             //Общая стоимость перелета
             totalPrice: ticket.flight.price.total.amount,
+            //Общее время в пути
+            totalTime: totalTime,
             //Полет туда
             startingFlight: {
                 //Город отправления

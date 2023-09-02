@@ -8,7 +8,7 @@ import { showMoreTickets } from '../../store/slices/ticketsSlice';
 
 const Tickets = () => {
     const { ticketsList, ticketsToView } = useAppSelector((state) => ({
-        ticketsList: state.tickets.allTickets,
+        ticketsList: state.tickets.ticketsFilter,
         ticketsToView: state.tickets.ticketsToView,
     }));
 

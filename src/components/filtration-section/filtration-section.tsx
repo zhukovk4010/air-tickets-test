@@ -1,6 +1,5 @@
 //Компонент фильтрации билетов
 
-import { useRef } from 'react';
 import { useAppDispatch } from '../../hooks/store-hooks';
 import {
     defaultFilter,

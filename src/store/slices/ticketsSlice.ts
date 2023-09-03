@@ -30,18 +30,31 @@ type InitialStateType = {
     ticketsToView: number;
     airlineNameList: string[];
     airlineNameListToView: string[];
-    filter: string | null;
+    sorted: string | null;
     filterTransfers: number | null;
+    minPriceFilter: number;
+    maxPriceFilter: number;
 };
 
 const initialState: InitialStateType = {
+    //Все билеты
     allTickets: [],
+    //Отфильтрованные билеты для показа пользователю
     ticketsFilter: [],
+    //Количество билетов, которые отрисовываются из списка отфильтрованных
     ticketsToView: 2,
+    //Список авиакомпаний
     airlineNameList: [],
+    //Список авиакомпаний, который выбрал пользователь
     airlineNameListToView: [],
-    filter: null,
+    //Выбранная сортировка пользователя
+    sorted: null,
+    //Выбранное количество пересадок
     filterTransfers: null,
+    //Минимальная указанная цена в фильтре
+    minPriceFilter: 0,
+    //Максимальная указанная цена в фильтре
+    maxPriceFilter: 0,
 };
 
 const ticketsSlice = createSlice({
@@ -70,7 +83,7 @@ const ticketsSlice = createSlice({
                 return a.totalPrice - b.totalPrice;
             });
             state.ticketsToView = 2;
-            state.filter = 'ByPriceDescending';
+            state.sorted = 'ByPriceDescending';
         },
         //Сортировка по возрастанию
         sortedByPriceAscending(state, action: PayloadAction) {
@@ -78,7 +91,7 @@ const ticketsSlice = createSlice({
                 return b.totalPrice - a.totalPrice;
             });
             state.ticketsToView = 2;
-            state.filter = 'ByPriceAscending';
+            state.sorted = 'ByPriceAscending';
         },
         //Сортировка по времени
         sortedByTime(state, action: PayloadAction) {
@@ -86,7 +99,7 @@ const ticketsSlice = createSlice({
                 return a.totalTime - b.totalTime;
             });
             state.ticketsToView = 2;
-            state.filter = 'ByTime';
+            state.sorted = 'ByTime';
         },
         //Фильтр по 1 пересадке
         filterByOneTranspant(state, action: PayloadAction) {
@@ -107,17 +120,27 @@ const ticketsSlice = createSlice({
                 );
             }
 
-            if (state.filter === 'ByPriceDescending') {
+            if (state.minPriceFilter && state.maxPriceFilter) {
+                const list = state.ticketsFilter;
+                state.ticketsFilter = [];
+                state.ticketsFilter = list.filter(
+                    (item) =>
+                        item.totalPrice >= state.minPriceFilter &&
+                        item.totalPrice <= state.maxPriceFilter
+                );
+            }
+
+            if (state.sorted === 'ByPriceDescending') {
                 state.ticketsFilter.sort((a, b) => {
                     return a.totalPrice - b.totalPrice;
                 });
             }
-            if (state.filter === 'ByPriceAscending') {
+            if (state.sorted === 'ByPriceAscending') {
                 state.ticketsFilter.sort((a, b) => {
                     return b.totalPrice - a.totalPrice;
                 });
             }
-            if (state.filter === 'ByTime') {
+            if (state.sorted === 'ByTime') {
                 state.ticketsFilter.sort((a, b) => {
                     return a.totalTime - b.totalTime;
                 });
@@ -144,17 +167,27 @@ const ticketsSlice = createSlice({
                 );
             }
 
-            if (state.filter === 'ByPriceDescending') {
+            if (state.minPriceFilter && state.maxPriceFilter) {
+                const list = state.ticketsFilter;
+                state.ticketsFilter = [];
+                state.ticketsFilter = list.filter(
+                    (item) =>
+                        item.totalPrice >= state.minPriceFilter &&
+                        item.totalPrice <= state.maxPriceFilter
+                );
+            }
+
+            if (state.sorted === 'ByPriceDescending') {
                 state.ticketsFilter.sort((a, b) => {
                     return a.totalPrice - b.totalPrice;
                 });
             }
-            if (state.filter === 'ByPriceAscending') {
+            if (state.sorted === 'ByPriceAscending') {
                 state.ticketsFilter.sort((a, b) => {
                     return b.totalPrice - a.totalPrice;
                 });
             }
-            if (state.filter === 'ByTime') {
+            if (state.sorted === 'ByTime') {
                 state.ticketsFilter.sort((a, b) => {
                     return a.totalTime - b.totalTime;
                 });
@@ -180,17 +213,27 @@ const ticketsSlice = createSlice({
                 });
             }
 
-            if (state.filter === 'ByPriceDescending') {
+            if (state.minPriceFilter && state.maxPriceFilter) {
+                const list = state.ticketsFilter;
+                state.ticketsFilter = [];
+                state.ticketsFilter = list.filter(
+                    (item) =>
+                        item.totalPrice >= state.minPriceFilter &&
+                        item.totalPrice <= state.maxPriceFilter
+                );
+            }
+
+            if (state.sorted === 'ByPriceDescending') {
                 state.ticketsFilter.sort((a, b) => {
                     return a.totalPrice - b.totalPrice;
                 });
             }
-            if (state.filter === 'ByPriceAscending') {
+            if (state.sorted === 'ByPriceAscending') {
                 state.ticketsFilter.sort((a, b) => {
                     return b.totalPrice - a.totalPrice;
                 });
             }
-            if (state.filter === 'ByTime') {
+            if (state.sorted === 'ByTime') {
                 state.ticketsFilter.sort((a, b) => {
                     return a.totalTime - b.totalTime;
                 });
@@ -233,6 +276,139 @@ const ticketsSlice = createSlice({
                     });
                 });
             }
+            if (state.minPriceFilter && state.maxPriceFilter) {
+                state.ticketsFilter.filter(
+                    (item) =>
+                        item.totalPrice >= state.minPriceFilter &&
+                        item.totalPrice <= state.maxPriceFilter
+                );
+            }
+            if (state.sorted === 'ByPriceDescending') {
+                state.ticketsFilter.sort((a, b) => {
+                    return a.totalPrice - b.totalPrice;
+                });
+            }
+            if (state.sorted === 'ByPriceAscending') {
+                state.ticketsFilter.sort((a, b) => {
+                    return b.totalPrice - a.totalPrice;
+                });
+            }
+            if (state.sorted === 'ByTime') {
+                state.ticketsFilter.sort((a, b) => {
+                    return a.totalTime - b.totalTime;
+                });
+            }
+        },
+        filterByPrice(
+            state,
+            action: PayloadAction<{ minPrice: number; maxPrice: number }>
+        ) {
+            state.ticketsFilter = [];
+            state.allTickets.forEach((item) => {
+                if (
+                    action.payload.minPrice <= item.totalPrice &&
+                    item.totalPrice <= action.payload.maxPrice
+                ) {
+                    state.ticketsFilter.push(item);
+                }
+            });
+            if (state.filterTransfers === 1) {
+                state.ticketsFilter = state.ticketsFilter.filter(
+                    (item) =>
+                        item.startingFlight.numberOfTransfers === 1 ||
+                        item.returnFlight.numberOfTransfers === 1
+                );
+            }
+            if (state.filterTransfers === 0) {
+                state.ticketsFilter = state.ticketsFilter.filter(
+                    (item) =>
+                        item.startingFlight.numberOfTransfers === 0 ||
+                        item.returnFlight.numberOfTransfers === 0
+                );
+            }
+            if (
+                state.airlineNameListToView.length === 0 ||
+                state.airlineNameListToView.length === 9
+            ) {
+            } else {
+                const list = state.ticketsFilter;
+                state.ticketsFilter = [];
+                state.airlineNameListToView.forEach((name) => {
+                    list.forEach((item, i) => {
+                        if (name === item.airlineName) {
+                            state.ticketsFilter.push(item);
+                        }
+                    });
+                });
+            }
+            if (state.sorted === 'ByPriceDescending') {
+                state.ticketsFilter.sort((a, b) => {
+                    return a.totalPrice - b.totalPrice;
+                });
+            }
+            if (state.sorted === 'ByPriceAscending') {
+                state.ticketsFilter.sort((a, b) => {
+                    return b.totalPrice - a.totalPrice;
+                });
+            }
+            if (state.sorted === 'ByTime') {
+                state.ticketsFilter.sort((a, b) => {
+                    return a.totalTime - b.totalTime;
+                });
+            }
+            state.ticketsToView = 2;
+            state.minPriceFilter = action.payload.minPrice;
+            state.maxPriceFilter = action.payload.maxPrice;
+        },
+        filterOffPrice(state, action: PayloadAction) {
+            state.ticketsFilter = state.allTickets;
+            if (state.filterTransfers === 1) {
+                state.ticketsFilter = state.ticketsFilter.filter(
+                    (item) =>
+                        item.startingFlight.numberOfTransfers === 1 ||
+                        item.returnFlight.numberOfTransfers === 1
+                );
+            }
+            if (state.filterTransfers === 0) {
+                state.ticketsFilter = state.ticketsFilter.filter(
+                    (item) =>
+                        item.startingFlight.numberOfTransfers === 0 ||
+                        item.returnFlight.numberOfTransfers === 0
+                );
+            }
+            if (
+                state.airlineNameListToView.length === 0 ||
+                state.airlineNameListToView.length === 9
+            ) {
+            } else {
+                const list = state.ticketsFilter;
+                state.ticketsFilter = [];
+                state.airlineNameListToView.forEach((name) => {
+                    list.forEach((item, i) => {
+                        if (name === item.airlineName) {
+                            state.ticketsFilter.push(item);
+                        }
+                    });
+                });
+            }
+            if (state.sorted === 'ByPriceDescending') {
+                state.ticketsFilter.sort((a, b) => {
+                    return a.totalPrice - b.totalPrice;
+                });
+            }
+            if (state.sorted === 'ByPriceAscending') {
+                state.ticketsFilter.sort((a, b) => {
+                    return b.totalPrice - a.totalPrice;
+                });
+            }
+            if (state.sorted === 'ByTime') {
+                state.ticketsFilter.sort((a, b) => {
+                    return a.totalTime - b.totalTime;
+                });
+            }
+            state.ticketsToView = 2;
+            state.minPriceFilter = 0;
+            state.maxPriceFilter = 0;
         },
     },
 });
@@ -247,6 +423,8 @@ export const {
     defaultFilter,
     showMoreTickets,
     filterByNamedAirline,
+    filterByPrice,
+    filterOffPrice,
 } = ticketsSlice.actions;
 
 export default ticketsSlice.reducer;

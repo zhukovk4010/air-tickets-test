@@ -22,6 +22,19 @@ const Tickets = () => {
         dispatch(showMoreTickets(2));
     };
 
+    const FooterPanel = () => {
+        if (ticketsList.length === 0) {
+            return <div>Нет билетов по заданным условиям</div>;
+        } else if (
+            ticketsList.length === ticketsToView ||
+            ticketsList.length - 1 === ticketsToView
+        ) {
+            return '';
+        } else {
+            return <button onClick={onButtonClick}>Показать еще</button>;
+        }
+    };
+
     return (
         <>
             {ticketLictComponents.map((ticket) => {
@@ -35,9 +48,12 @@ const Tickets = () => {
                     />
                 );
             })}
-            <div className={styles.buttonContainer}>
-                <button onClick={onButtonClick}>Показать еще</button>
-            </div>
+            {ticketsList.length === ticketsToView ? (
+                <div className={styles.hidden}></div>
+            ) : (
+                ''
+            )}
+            <div className={styles.buttonContainer}>{FooterPanel()}</div>
         </>
     );
 };

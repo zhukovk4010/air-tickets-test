@@ -17,3 +17,12 @@
 .pricingElement + .pricingElement {
     margin-top: 1em;
 }
+
+.buttonWrapper {
+    text-align: center;
+    padding: 1em;
+}
+
+.buttonWrapper > button + button {
+    margin-top: 1em;
+}

@@ -2,20 +2,23 @@
 
 ## Stack
 
-React\
-Redux-toolkit\
-Typescript\
-CSS modules\
+-   React\
+-   Redux-toolkit\
+-   Typescript\
+-   CSS modules\
 
 ## Local start
 
-git clone https://github.com/zhukovk4010/air-tickets-test.git \
-cd air-tickets-test\
-npm i\
-npm start\
+1. git clone https://github.com/zhukovk4010/air-tickets-test.git \
+2. cd air-tickets-test\
+3. npm i\
+4. npm start\
 
 ### Реализованный функционал
 
-Отрисовка билетов на основе mock-файла\
-Реализована сортировка, фильтрация, фильтрация по цене, фильтрация по пересадкам, фильтрация по авиакомпаниям\
-Реализована фасетная фильтрация
+1. Отрисовка билетов на основе mock-файла\
+2. Реализована сортировка\
+3. Реализована фильтрация по цене\
+4. Реализована фильтрация по пересадкам\
+5. фильтрация по авиакомпаниям\
+6. Реализована фасетная фильтрация

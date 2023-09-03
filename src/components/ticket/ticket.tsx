@@ -11,12 +11,12 @@ type TicketPropsType = {
     returnFlight: FlightType;
 };
 
-function Ticket({
+const Ticket = ({
     airlineName,
     totalPrice,
     startingFlight,
     returnFlight,
-}: TicketPropsType) {
+}: TicketPropsType) => {
     return (
         <section className={styles.ticket}>
             <div className={styles.ticketHeader}>
@@ -38,6 +38,6 @@ function Ticket({
             <div className={styles.chooseButton}>Выбрать</div>
         </section>
     );
-}
+};
 
 export default Ticket;

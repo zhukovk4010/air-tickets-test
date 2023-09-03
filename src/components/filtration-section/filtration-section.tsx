@@ -1,4 +1,4 @@
-//Компонент фильтрации билетов
+//Компонент фильтрации билетов по пересадке
 
 import { useAppDispatch } from '../../hooks/store-hooks';
 import {
@@ -8,10 +8,11 @@ import {
 } from '../../store/slices/ticketsSlice';
 import styles from './filtration-section.module.css';
 
-function FiltrationSection() {
+const FiltrationSection = () => {
     const dispatch = useAppDispatch();
 
     const onCheckboxClickWrapper = () => {
+        //Состояние checkbox
         let isOneChangeCheckboxActive = false;
         let isNonStopCheckboxActive = false;
         return (id: string) => {
@@ -117,6 +118,6 @@ function FiltrationSection() {
             </div>
         </section>
     );
-}
+};
 
 export default FiltrationSection;

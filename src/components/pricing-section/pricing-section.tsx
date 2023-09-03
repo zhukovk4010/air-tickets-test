@@ -1,4 +1,4 @@
-//Компонент фильтрации билетов
+//Компонент фильтрации билетов по цене
 
 import { useState } from 'react';
 import styles from './pricing-section.module.css';
@@ -10,10 +10,12 @@ function PricingSection() {
     const [minPrice, setMinPrice] = useState(0);
     const [maxPrice, setMaxPrice] = useState(0);
 
+    //Кнопка для фильтрации
     const onButtonFilterClick = () => {
         dispatch(filterByPrice({ minPrice: minPrice, maxPrice: maxPrice }));
     };
 
+    //Кнопка для отключения фильтрации
     const onButtonOffFilterClick = () => {
         dispatch(filterOffPrice());
         setMinPrice(0);

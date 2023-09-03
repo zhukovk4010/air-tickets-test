@@ -80,6 +80,7 @@ const ticketsSlice = createSlice({
                 state.airlineNameList.push(item.airlineName);
             });
 
+            //Заполняем список компаний с билетами
             state.airlineNameListUnDisabled = state.airlineNameList;
         },
         //Сортировка по убыванию
@@ -107,6 +108,11 @@ const ticketsSlice = createSlice({
             state.sorted = 'ByTime';
         },
         //Фильтр по 1 пересадке
+        //Чистим список компаний с билетами
+        //Проверяем на количество выбранных компаний
+        //Проверяем цену
+        //Сортируем
+        //Заполняем список компаний с билетами
         filterByOneTranspant(state, action: PayloadAction) {
             state.airlineNameListUnDisabled = [];
             if (
@@ -165,6 +171,11 @@ const ticketsSlice = createSlice({
             state.filterTransfers = 1;
         },
         //Фильтр без пересадок
+        //Чистим список компаний с билетами
+        //Проверяем на количество выбранных компаний
+        //Проверяем цену
+        //Сортируем
+        //Заполняем список компаний с билетами
         filterWithoutTranspant(state, action: PayloadAction) {
             state.airlineNameListUnDisabled = [];
             if (
@@ -223,7 +234,12 @@ const ticketsSlice = createSlice({
             state.ticketsToView = 2;
             state.filterTransfers = 0;
         },
-        //Показываем все билеты
+        //Отключение фильтра по пересадкам
+        //Чистим список компаний с билетами
+        //Проверяем на количество выбранных компаний
+        //Проверяем цену
+        //Сортируем
+        //Заполняем список компаний с билетами
         defaultFilter(state, action: PayloadAction) {
             state.airlineNameListUnDisabled = [];
             if (
@@ -281,10 +297,18 @@ const ticketsSlice = createSlice({
             state.ticketsToView = 2;
             state.filterTransfers = null;
         },
+        //Колиечество отрисовываемых билетов
         showMoreTickets(state, action: PayloadAction<number>) {
             state.ticketsToView += action.payload;
         },
+        //Фильтр по компаниям
+        //Чистим список компаний с билетами
+        //Проверяем выбрана ли компания в фильтре
+        //Если активна, то выключаем ее и убираем билеты
+        //Если не активна, то добавляем в активный список и добавляем ее билеты
+        //Проверяем фильтр по цене и сортировке
         filterByNamedAirline(state, action: PayloadAction<string>) {
+            state.airlineNameListUnDisabled = [];
             state.ticketsFilter = [];
             state.ticketsToView = 2;
             //Если нажали по активной фильтрации, то выключаем данный фильтр и убираем билеты
@@ -338,7 +362,21 @@ const ticketsSlice = createSlice({
                     return a.totalTime - b.totalTime;
                 });
             }
+            let ticketsList = state.ticketsFilter.filter(
+                (item, index, array) =>
+                    index ===
+                    array.findIndex((t) => t.airlineName === item.airlineName)
+            );
+
+            ticketsList.forEach((item) => {
+                state.airlineNameListUnDisabled.push(item.airlineName);
+            });
         },
+        //Фильтр по цене
+        //Чистим список компаний с билетами
+        //Фильтруем исходный массив по цене
+        //Проверяем фильтр по пересадкам
+        //Проверяем сортировку
         filterByPrice(
             state,
             action: PayloadAction<{ minPrice: number; maxPrice: number }>
@@ -412,6 +450,10 @@ const ticketsSlice = createSlice({
             state.minPriceFilter = action.payload.minPrice;
             state.maxPriceFilter = action.payload.maxPrice;
         },
+        //Отключаем фильтр по цене
+        //Чистим список компаний с билетами
+        //Проверяем фильтр по пересадкам
+        //Проверяем сортировку
         filterOffPrice(state, action: PayloadAction) {
             state.airlineNameListUnDisabled = [];
             state.ticketsFilter = state.allTickets;

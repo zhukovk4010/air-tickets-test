@@ -1,16 +1,15 @@
-//Компонент фильтрации билетов
+//Компонент фильтрации билетов по авиакомпаниям
 
-import { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/store-hooks';
 import { filterByNamedAirline } from '../../store/slices/ticketsSlice';
 import styles from './airlines-section.module.css';
 
-function AirlinesSection() {
-    const { airlineNameList, airLineNameListUnDisabled } = useAppSelector(
-        (state) => ({
-            airlineNameList: state.tickets.airlineNameList,
-            airLineNameListUnDisabled: state.tickets.airlineNameListUnDisabled,
-        })
+const AirlinesSection = () => {
+    const airlineNameList = useAppSelector(
+        (state) => state.tickets.airlineNameList
+    );
+    const airLineNameListUnDisabled = useAppSelector(
+        (state) => state.tickets.airlineNameListUnDisabled
     );
 
     const dispatch = useAppDispatch();
@@ -23,10 +22,13 @@ function AirlinesSection() {
         <section className={styles.pricingSection}>
             <h5>Авикомпании</h5>
             {airlineNameList.map((item, i) => {
+                //Проверяем у каких компаний есть билеты и отключаем кнопки если необходимо
                 let disabled = false;
+
                 airLineNameListUnDisabled.includes(item)
                     ? (disabled = false)
                     : (disabled = true);
+
                 return (
                     <div key={i} className={styles.pricingElement}>
                         <input
@@ -43,6 +45,6 @@ function AirlinesSection() {
             })}
         </section>
     );
-}
+};
 
 export default AirlinesSection;

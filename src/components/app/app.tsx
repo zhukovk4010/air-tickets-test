@@ -12,8 +12,6 @@ import { TicketType, addTickets } from '../../store/slices/ticketsSlice';
 import Tickets from '../tickets/tickets';
 
 const App = () => {
-    const dispatch = useAppDispatch();
-    console.log('Рендер');
     //База перелетов, тип any, чтобы не типизировать исходный массив
     const ticketsData: any = data;
 
@@ -156,6 +154,7 @@ const App = () => {
     });
 
     //Диспатчим данные в стор
+    const dispatch = useAppDispatch();
     dispatch(addTickets(ticketsList));
 
     return (

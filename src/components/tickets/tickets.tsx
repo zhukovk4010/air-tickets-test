@@ -5,17 +5,20 @@ import Ticket from '../ticket/ticket';
 
 import styles from './tickets.module.css';
 import { showMoreTickets } from '../../store/slices/ticketsSlice';
+import { useMemo } from 'react';
 
 const Tickets = () => {
-    const { ticketsList, ticketsToView } = useAppSelector((state) => ({
-        ticketsList: state.tickets.ticketsFilter,
-        ticketsToView: state.tickets.ticketsToView,
-    }));
+    const ticketsList = useAppSelector((state) => state.tickets.ticketsFilter);
+    const ticketsToView = useAppSelector(
+        (state) => state.tickets.ticketsToView
+    );
 
     const dispatch = useAppDispatch();
 
-    const ticketLictComponents = ticketsList.filter(
-        (item, index) => index < ticketsToView
+    //Количество отрисованных билетов
+    const ticketLictComponents = useMemo(
+        () => ticketsList.filter((item, index) => index < ticketsToView),
+        [ticketsList, ticketsToView]
     );
 
     const onButtonClick = () => {

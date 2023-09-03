@@ -6,7 +6,7 @@ import PricingSection from '../pricing-section/pricing-section';
 import SortingSection from '../sorting-section/sorting-section';
 import styles from './search-settings-panel.module.css';
 
-function SearchSettingsPanel() {
+const SearchSettingsPanel = () => {
     return (
         <aside className={styles.searchSettingsPanel}>
             <SortingSection />
@@ -15,6 +15,6 @@ function SearchSettingsPanel() {
             <AirlinesSection />
         </aside>
     );
-}
+};
 
 export default SearchSettingsPanel;
